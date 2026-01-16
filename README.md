@@ -292,6 +292,174 @@ try {
 }
 ```
 
+## Product Classes (ИКПУ)
+
+Manage product classification codes for your company profile.
+
+### Get Attached Product Classes
+
+Retrieve product classes currently attached to your profile:
+
+```typescript
+try {
+  const result = await didox.profile.getProductClassCodes();
+  
+  console.log('Total attached classes:', result.data.length);
+  
+  result.data.forEach(productClass => {
+    console.log(`Code: ${productClass.classCode}`);
+    console.log(`Name: ${productClass.className}`);
+    console.log(`Packages: ${productClass.packages.length} available`);
+    console.log('---');
+  });
+} catch (error) {
+  console.error('Failed to get product classes:', error.message);
+}
+```
+
+### Search Available Product Classes
+
+Search for product classes you can attach to your profile:
+
+```typescript
+try {
+  const result = await didox.profile.searchProductClasses({
+    search: 'фото',
+    lang: 'ru',
+    page: 1
+  });
+  
+  console.log(`Found ${result.total} classes (page ${result.current_page})`);
+  
+  result.data.forEach(productClass => {
+    console.log(`Code: ${productClass.classCode}`);
+    console.log(`Name: ${productClass.className_ru}`);
+    console.log(`Origin: ${productClass.origin.name}`);
+  });
+} catch (error) {
+  console.error('Failed to search product classes:', error.message);
+}
+```
+
+### Add/Remove Product Classes
+
+```typescript
+try {
+  // Add a product class
+  await didox.profile.addProductClass('08418001001013043');
+  console.log('Product class added successfully');
+  
+  // Remove a product class
+  await didox.profile.removeProductClass('08418001001013043');
+  console.log('Product class removed successfully');
+} catch (error) {
+  console.error('Failed to manage product class:', error.message);
+}
+```
+
+## VAT & Taxpayer Information
+
+Get VAT registration and taxpayer type information.
+
+### VAT Registration Status
+
+Check VAT registration status by TIN or PINFL:
+
+```typescript
+try {
+  const vatStatus = await didox.profile.getVatRegStatus('123456789');
+  
+  console.log(`VAT Registration Code: ${vatStatus.vatRegCode}`);
+  console.log(`VAT Status: ${vatStatus.vatRegStatus}`);
+  
+  // Status codes:
+  // 10 - Плательщик НДС
+  // 20 - Плательщик НДС+ (сертификат активный)
+  // 21 - Плательщик НДС+ (сертификат неактивный)
+  // 30 - Плательщик налога с оборота
+  // 50 - Индивидуальный предприниматель
+  // 60 - Физическое лицо
+} catch (error) {
+  console.error('Failed to get VAT status:', error.message);
+}
+```
+
+### Taxpayer Type
+
+Get taxpayer type information:
+
+```typescript
+try {
+  const taxpayerType = await didox.profile.getTaxpayerType(
+    '123456789', // TIN
+    'ru',        // Language
+    '17.01.2022' // Optional date
+  );
+  
+  console.log(`Code: ${taxpayerType.code}`);
+  console.log(`Name: ${taxpayerType.name}`);
+} catch (error) {
+  console.error('Failed to get taxpayer type:', error.message);
+}
+```
+
+## Warehouses
+
+Get warehouse information by TIN or PINFL.
+
+```typescript
+try {
+  const warehouses = await didox.profile.getWarehouses('123456789');
+  
+  console.log(`Found ${warehouses.length} warehouses`);
+  
+  warehouses.forEach(warehouse => {
+    console.log(`Warehouse #${warehouse.warehouseNumber}`);
+    console.log(`Name: ${warehouse.warehouseName}`);
+    console.log(`Address: ${warehouse.warehouseAddress}`);
+    console.log('---');
+  });
+} catch (error) {
+  console.error('Failed to get warehouses:', error.message);
+}
+```
+
+## Company Users & Permissions
+
+Manage company user permissions with signed tokens.
+
+```typescript
+try {
+  await didox.profile.updateCompanyUsersPermissions({
+    gnkpermissions: 'base64-signed-gnk-roles-token',
+    internalpermissions: 'base64-signed-didox-roles-token',
+    is_director: 1
+  });
+  
+  console.log('User permissions updated successfully');
+} catch (error) {
+  console.error('Failed to update permissions:', error.message);
+}
+```
+
+**Note**: This API requires externally signed tokens. The SDK does not generate signatures - you must prepare and sign the role JSONs externally before calling this method.
+
+### Role Codes Reference
+
+**GNK (Tax Committee) Roles:**
+- 11 - Отправка / отмена ЭСФ
+- 12 - Подтверждение / отклонение ЭСФ
+- 21 - Отправка / отмена доверенностей
+- 22 - Подтверждение / отклонение доверенностей
+- And more...
+
+**Didox Internal Roles:**
+- 191 - Отправка / отмена заказов
+- 192 - Подтверждение / отклонение заказов
+- 59 - Создание договоров
+- 199 - Создание заказов
+- And more...
+
 ## Error Handling
 
 The SDK provides specific error classes for different failure scenarios:

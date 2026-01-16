@@ -72,6 +72,9 @@ export class AuthApi {
         body
       );
 
+      // Automatically set the access token for future requests
+      this.httpClient.setAccessToken(response.data.token);
+
       return response.data;
     } catch (error) {
       if (error instanceof DidoxApiError && error.statusCode === 422) {
@@ -137,6 +140,9 @@ export class AuthApi {
         undefined, // No body for this request
         { headers }
       );
+
+      // Automatically set the access token for future requests
+      this.httpClient.setAccessToken(response.data.token);
 
       return response.data;
     } catch (error) {

@@ -16,12 +16,26 @@ import type {
   ProfileUpdateResponse,
   ProfileOperators
 } from './profile.types.js';
+import { ProductClassesApi } from './productClasses.api.js';
+import { VatApi } from './vat.api.js';
+import { WarehousesApi } from './warehouses.api.js';
+import { UsersApi } from './users.api.js';
 
 /**
  * Profile API implementation
  */
 export class ProfileApi {
-  constructor(private readonly httpClient: HttpClient) {}
+  public readonly productClasses: ProductClassesApi;
+  public readonly vat: VatApi;
+  public readonly warehouses: WarehousesApi;
+  public readonly users: UsersApi;
+
+  constructor(private readonly httpClient: HttpClient) {
+    this.productClasses = new ProductClassesApi(httpClient);
+    this.vat = new VatApi(httpClient);
+    this.warehouses = new WarehousesApi(httpClient);
+    this.users = new UsersApi(httpClient);
+  }
 
   /**
    * Get current company profile
@@ -187,5 +201,78 @@ export class ProfileApi {
       }
       throw error;
     }
+  }
+
+  // Product Classes convenience methods
+  /**
+   * Get attached product class codes for current profile
+   * @returns Promise<ProductClassCodesResponse>
+   */
+  async getProductClassCodes() {
+    return this.productClasses.getProductClassCodes();
+  }
+
+  /**
+   * Search available product class codes
+   * @param params Search parameters
+   */
+  async searchProductClasses(params: Parameters<ProductClassesApi['searchProductClasses']>[0] = {}) {
+    return this.productClasses.searchProductClasses(params);
+  }
+
+  /**
+   * Add product class code to current profile
+   * @param classCode Class code (digits only)
+   */
+  async addProductClass(classCode: string) {
+    return this.productClasses.addProductClass(classCode);
+  }
+
+  /**
+   * Remove product class code from current profile
+   * @param classCode Class code to remove
+   */
+  async removeProductClass(classCode: string) {
+    return this.productClasses.removeProductClass(classCode);
+  }
+
+  // VAT convenience methods
+  /**
+   * Get VAT registration status by TIN or PINFL
+   * @param taxIdOrPinfl TIN (9 digits) or PINFL (14 digits)
+   * @param documentDate Optional date in YYYY-MM-DD format
+   */
+  async getVatRegStatus(taxIdOrPinfl: string, documentDate?: string) {
+    return this.vat.getVatRegStatus(taxIdOrPinfl, documentDate);
+  }
+
+  /**
+   * Get taxpayer type by TIN
+   * @param tin TIN (9 digits)
+   * @param lang Language (ru or uz)
+   * @param date Optional date in DD.MM.YYYY format
+   */
+  async getTaxpayerType(tin: string, lang: 'ru' | 'uz', date?: string) {
+    return this.vat.getTaxpayerType(tin, lang, date);
+  }
+
+  // Warehouses convenience methods
+  /**
+   * Get warehouses by TIN or PINFL
+   * @param taxIdOrPinfl TIN (9 digits) or PINFL (14 digits)
+   */
+  async getWarehouses(taxIdOrPinfl: string) {
+    return this.warehouses.getWarehouses(taxIdOrPinfl);
+  }
+
+  // Users convenience methods
+  /**
+   * Update company users permissions
+   * @param permissions Permissions data with signed tokens
+   */
+  async updateCompanyUsersPermissions(
+    permissions: Parameters<UsersApi['updateCompanyUsersPermissions']>[0]
+  ) {
+    return this.users.updateCompanyUsersPermissions(permissions);
   }
 }

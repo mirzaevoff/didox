@@ -5,6 +5,37 @@ All notable changes to the Didox SDK will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.3] - 2026-01-16
+
+### Added
+- **Product Classes (ИКПУ) Management**
+  - `getProductClassCodes()` - Get attached product class codes for current profile
+  - `searchProductClasses()` - Search available product classes with pagination
+  - `addProductClass()` - Add product class code to profile
+  - `removeProductClass()` - Remove product class code from profile
+  - `checkProductClassCode()` - Check product class code packages by TIN
+- **VAT & Taxpayer Information**
+  - `getVatRegStatus()` - Get VAT registration status by TIN or PINFL
+  - `getTaxpayerType()` - Get taxpayer type information
+  - Support for historical data queries with date parameters
+- **Warehouses Management**
+  - `getWarehouses()` - Get warehouses by TIN or PINFL
+- **Company Users & Permissions**
+  - `updateCompanyUsersPermissions()` - Update company users permissions with signed tokens
+  - Support for GNK (tax committee) and Didox internal roles
+- **Enhanced Profile Module**
+  - Modular architecture with sub-APIs for better organization
+  - Convenience methods for direct access to extended features
+- **Comprehensive Type Definitions**
+  - Full TypeScript support for all new APIs
+  - Enums for VAT status codes and role codes
+  - Detailed interface definitions for all request/response objects
+
+### Technical Improvements
+- Extended validation for TIN/PINFL formats
+- Enhanced error handling for new endpoint types
+- Maintained backward compatibility with existing APIs
+
 ## [1.0.2] - 2026-01-16
 
 ### Added

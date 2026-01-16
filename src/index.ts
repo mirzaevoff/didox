@@ -40,6 +40,42 @@ export type {
   ProfileOperators
 } from './modules/profile/profile.types.js';
 
+// Product Classes types
+export type {
+  ProductClass,
+  ProductClassPackage,
+  ProductClassOrigin,
+  ProductClassCodesResponse,
+  ProductClassSearchResponse,
+  ProductClassSearchParams,
+  AddProductClassRequest,
+  AddProductClassResponse,
+  RemoveProductClassResponse,
+  ProductClassesCodeCheckResponse
+} from './modules/profile/productClasses.types.js';
+
+// VAT types
+export type {
+  VatRegStatusResponse,
+  TaxpayerTypeResponse,
+  SupportedLanguage,
+  VatRegStatus
+} from './modules/profile/vat.types.js';
+
+// Warehouses types
+export type {
+  Warehouse,
+  WarehousesResponse
+} from './modules/profile/warehouses.types.js';
+
+// Users types
+export type {
+  UpdateCompanyUsersPermissionsRequest,
+  UpdateCompanyUsersPermissionsResponse,
+  GNKRoleCode,
+  DidoxRoleCode
+} from './modules/profile/users.types.js';
+
 // Utilities module types
 export type {
   CompanyBranch,
@@ -59,4 +95,8 @@ export {
 export { AuthApi } from './modules/auth/auth.api.js';
 export { AccountApi } from './modules/account/account.api.js';
 export { ProfileApi } from './modules/profile/profile.api.js';
+export { ProductClassesApi } from './modules/profile/productClasses.api.js';
+export { VatApi } from './modules/profile/vat.api.js';
+export { WarehousesApi } from './modules/profile/warehouses.api.js';
+export { UsersApi } from './modules/profile/users.api.js';
 export { UtilitiesApi } from './modules/utilities/utilities.api.js';
