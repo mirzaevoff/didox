@@ -5,6 +5,40 @@ All notable changes to the Didox SDK will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2026-01-16
+
+### Added
+
+- **Profile module** - Complete company profile management API
+- **Get current profile** - Retrieve detailed company information (`didox.profile.getProfile()`)
+- **Update profile** - Update company profile with comprehensive validation (`didox.profile.updateProfile()`)
+- **Profile operators** - Get operators associated with the profile (`didox.profile.getOperators()`)
+- **Utilities module** - Helper functions for company data operations
+- **Get branches by TIN** - Retrieve company branches by Tax ID (`didox.utilities.getBranchesByTin()`)
+
+### Technical Features
+
+- **Enhanced validation** - Support for TIN (9 digits), PINFL (14 digits), VAT rates, regions
+- **Comprehensive typing** - Full TypeScript support for all profile fields
+- **Operator management** - Access to integrated platform operators (Didox, Faktura, etc.)
+- **Branch queries** - Geographic and organizational branch information
+- **Field filtering** - Only expose documented API fields in public types
+
+### Validation Rules
+
+- **TIN validation** - Exactly 9 digits for company/director identification
+- **PINFL validation** - Exactly 14 digits for personal identification
+- **Notifications** - Only 0 (disabled) or 1 (enabled)
+- **Region ID** - Numeric regional identifiers
+- **VAT settings** - Number validation for VAT rates and excise flags
+
+### API Methods
+
+- `didox.profile.getProfile()` - Get comprehensive company profile
+- `didox.profile.updateProfile()` - Update company information
+- `didox.profile.getOperators()` - List profile operators
+- `didox.utilities.getBranchesByTin()` - Query branches by company TIN
+
 ## [1.0.1] - 2026-01-16
 
 ### Added

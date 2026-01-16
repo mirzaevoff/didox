@@ -190,6 +190,108 @@ try {
 }
 ```
 
+## Profile
+
+The Profile module provides access to detailed company profile information and management capabilities.
+
+### Get Current Profile
+
+Retrieve comprehensive company profile data:
+
+```typescript
+try {
+  const profile = await didox.profile.getProfile();
+  
+  console.log('Company:', profile.fullName);        // Full company name
+  console.log('TIN:', profile.tin);                 // Tax ID
+  console.log('Balance:', profile.balance);         // Account balance
+  console.log('Director:', profile.director);       // Director name
+  console.log('Address:', profile.address);         // Company address
+  console.log('VAT Status:', profile.VATRegStatus); // VAT registration status
+  console.log('Messengers:', profile.messengers);   // Connected messengers
+} catch (error) {
+  if (error instanceof DidoxAuthError) {
+    console.error('Authentication required:', error.message);
+  }
+}
+```
+
+### Update Profile
+
+Update company profile information with validation:
+
+```typescript
+try {
+  const updatedProfile = await didox.profile.updateProfile({
+    phone: '998901234567',
+    email: 'company@example.com',
+    notifications: 1,              // Enable notifications
+    regionId: 26,                  // Tashkent region
+    directorTin: '123456789',      // Director's TIN (9 digits)
+    address: 'New company address',
+    vatRate: 15                    // VAT rate percentage
+  });
+  
+  console.log('Profile updated successfully');
+  console.log('Updated company:', updatedProfile.name);
+} catch (error) {
+  if (error instanceof DidoxValidationError) {
+    console.error('Validation error:', error.message);
+    console.error('Field:', error.field);
+  }
+}
+```
+
+### Get Profile Operators
+
+Retrieve operators associated with the company:
+
+```typescript
+try {
+  const operators = await didox.profile.getOperators();
+  
+  Object.entries(operators).forEach(([id, name]) => {
+    console.log(`Operator ${id}: ${name}`);
+  });
+  
+  // Example output:
+  // Operator 202530465: soliqservis.uz
+  // Operator 302563857: Faktura.uz
+  // Operator 302936161: Didox.uz
+} catch (error) {
+  console.error('Failed to get operators:', error.message);
+}
+```
+
+## Utilities
+
+The Utilities module provides helper functions for working with company data and branches.
+
+### Get Branches by TIN
+
+Retrieve branch information for a specific company:
+
+```typescript
+try {
+  const branches = await didox.utilities.getBranchesByTin({
+    tin: '123456789'  // Company TIN (9 digits)
+  });
+  
+  branches.forEach(branch => {
+    console.log(`Branch: ${branch.branchName}`);
+    console.log(`Location: ${branch.address}`);
+    console.log(`Director: ${branch.directorName}`);
+    console.log(`Status: ${branch.isDeleted ? 'Deleted' : 'Active'}`);
+    console.log(`Coordinates: ${branch.latitude}, ${branch.longitude}`);
+    console.log('---');
+  });
+} catch (error) {
+  if (error instanceof DidoxValidationError) {
+    console.error('Invalid TIN format:', error.message);
+  }
+}
+```
+
 ## Error Handling
 
 The SDK provides specific error classes for different failure scenarios:
@@ -257,7 +359,13 @@ import type {
   DidoxLocale,
   AccountProfile,
   UpdateProfileRequest,
-  UpdateProfileResponse
+  UpdateProfileResponse,
+  CompanyProfile,
+  ProfileUpdateRequest,
+  ProfileUpdateResponse,
+  ProfileOperators,
+  CompanyBranch,
+  GetBranchesByTinRequest
 } from 'didox';
 
 // Fully typed request

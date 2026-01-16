@@ -32,6 +32,20 @@ export type {
   UpdateProfileResponse
 } from './modules/account/account.types.js';
 
+// Profile module types
+export type {
+  CompanyProfile,
+  ProfileUpdateRequest,
+  ProfileUpdateResponse,
+  ProfileOperators
+} from './modules/profile/profile.types.js';
+
+// Utilities module types
+export type {
+  CompanyBranch,
+  GetBranchesByTinRequest
+} from './modules/utilities/utilities.types.js';
+
 // Error classes
 export {
   DidoxError,
@@ -44,3 +58,5 @@ export {
 // Re-export for convenience
 export { AuthApi } from './modules/auth/auth.api.js';
 export { AccountApi } from './modules/account/account.api.js';
+export { ProfileApi } from './modules/profile/profile.api.js';
+export { UtilitiesApi } from './modules/utilities/utilities.api.js';

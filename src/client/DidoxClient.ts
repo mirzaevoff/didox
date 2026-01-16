@@ -3,6 +3,8 @@ import { DidoxValidationError } from '../http/errors.js';
 import { DidoxConfig, ResolvedDidoxConfig, resolveConfig } from './DidoxConfig.js';
 import { AuthApi } from '../modules/auth/auth.api.js';
 import { AccountApi } from '../modules/account/account.api.js';
+import { ProfileApi } from '../modules/profile/profile.api.js';
+import { UtilitiesApi } from '../modules/utilities/utilities.api.js';
 
 /**
  * Main Didox SDK client
@@ -35,6 +37,16 @@ export class DidoxClient {
    */
   public readonly account: AccountApi;
 
+  /**
+   * Company Profile API
+   */
+  public readonly profile: ProfileApi;
+
+  /**
+   * Utilities API
+   */
+  public readonly utilities: UtilitiesApi;
+
   constructor(config: DidoxConfig) {
     // Validate configuration
     this.validateConfig(config);
@@ -59,6 +71,8 @@ export class DidoxClient {
     // Initialize API modules
     this.auth = new AuthApi(this.httpClient);
     this.account = new AccountApi(this.httpClient);
+    this.profile = new ProfileApi(this.httpClient);
+    this.utilities = new UtilitiesApi(this.httpClient);
   }
 
   /**
