@@ -25,6 +25,13 @@ export type {
   UserPermissions
 } from './modules/auth/auth.types.js';
 
+// Account module types
+export type {
+  AccountProfile,
+  UpdateProfileRequest,
+  UpdateProfileResponse
+} from './modules/account/account.types.js';
+
 // Error classes
 export {
   DidoxError,
@@ -36,3 +43,4 @@ export {
 
 // Re-export for convenience
 export { AuthApi } from './modules/auth/auth.api.js';
+export { AccountApi } from './modules/account/account.api.js';

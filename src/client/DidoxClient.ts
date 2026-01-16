@@ -2,6 +2,7 @@ import { HttpClient } from '../http/httpClient.js';
 import { DidoxValidationError } from '../http/errors.js';
 import { DidoxConfig, ResolvedDidoxConfig, resolveConfig } from './DidoxConfig.js';
 import { AuthApi } from '../modules/auth/auth.api.js';
+import { AccountApi } from '../modules/account/account.api.js';
 
 /**
  * Main Didox SDK client
@@ -29,6 +30,11 @@ export class DidoxClient {
    */
   public readonly auth: AuthApi;
 
+  /**
+   * Account / Profile API
+   */
+  public readonly account: AccountApi;
+
   constructor(config: DidoxConfig) {
     // Validate configuration
     this.validateConfig(config);
@@ -47,8 +53,12 @@ export class DidoxClient {
       }
     });
 
+    // Set partner token for Partner-Authorization header
+    this.httpClient.setPartnerToken(this.config.partnerToken);
+
     // Initialize API modules
     this.auth = new AuthApi(this.httpClient);
+    this.account = new AccountApi(this.httpClient);
   }
 
   /**

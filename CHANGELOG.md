@@ -5,6 +5,30 @@ All notable changes to the Didox SDK will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.1] - 2026-01-16
+
+### Added
+
+- **Account module** - Complete account/profile management API
+- **Get current profile** - Retrieve authenticated user profile information (`didox.account.getProfile()`)
+- **Update profile** - Update user profile with validation (`didox.account.updateProfile()`)
+- **Input validation for profile update** - Strict validation for mobile, email, password, notifications
+- **Enhanced authorization headers** - Automatic Partner-Authorization header management
+- **TypeScript support for Account** - Full type definitions for profile operations
+
+### Technical Features
+
+- **Mobile validation** - Format 998XXXXXXXXX (12 digits)
+- **Email validation** - Standard email format validation
+- **Password validation** - Optional field, minimum 8 characters when provided
+- **Notifications validation** - Accepts only 0 (disabled) or 1 (enabled)
+- **Dual authentication** - Supports both user-key and Partner-Authorization headers
+
+### API Methods
+
+- `didox.account.getProfile()` - Get current user profile
+- `didox.account.updateProfile()` - Update user profile information
+
 ## [1.0.0] - 2026-01-16
 
 ### Added

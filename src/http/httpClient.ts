@@ -35,9 +35,17 @@ export interface HttpClientConfig {
 export class HttpClient {
   private config: HttpClientConfig;
   private accessToken: string | undefined;
+  private partnerToken: string | undefined;
 
   constructor(config: HttpClientConfig) {
     this.config = config;
+  }
+
+  /**
+   * Set the partner token for Partner-Authorization header
+   */
+  public setPartnerToken(token: string): void {
+    this.partnerToken = token;
   }
 
   /**
@@ -78,6 +86,11 @@ export class HttpClient {
     // Add access token if available
     if (this.accessToken) {
       requestHeaders['user-key'] = this.accessToken;
+    }
+
+    // Add partner token if available
+    if (this.partnerToken) {
+      requestHeaders['Partner-Authorization'] = this.partnerToken;
     }
 
     // Add Content-Type for requests with body

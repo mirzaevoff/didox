@@ -144,6 +144,52 @@ console.log('Company token:', result.token);
 console.log('User roles in company:', result.permissions.roles);
 ```
 
+## Account / Profile
+
+### Get Current Profile
+
+Retrieve the profile information for the currently authenticated user:
+
+```typescript
+try {
+  const profile = await didox.account.getProfile();
+  
+  console.log('Mobile:', profile.mobile);           // 998XXXXXXXXX
+  console.log('Email:', profile.email);             // user@example.com
+  console.log('Notifications:', profile.notifications); // 0 or 1
+  console.log('Messengers:', profile.messengers);   // ['telegram', 'viber']
+} catch (error) {
+  if (error instanceof DidoxAuthError) {
+    console.error('Authentication required:', error.message);
+  }
+}
+```
+
+### Update Profile
+
+Update the current user's profile information:
+
+```typescript
+try {
+  const updatedProfile = await didox.account.updateProfile({
+    mobile: '998901234567',        // format: 998XXXXXXXXX
+    email: 'newemail@example.com', // valid email
+    password: 'newPassword123',    // optional, min 8 chars
+    notifications: 1               // 1 = enabled, 0 = disabled
+  });
+  
+  console.log('Profile updated successfully');
+  console.log('New mobile:', updatedProfile.mobile);
+  console.log('New email:', updatedProfile.email);
+  console.log('Notifications:', updatedProfile.notifications);
+} catch (error) {
+  if (error instanceof DidoxValidationError) {
+    console.error('Validation error:', error.message);
+    console.error('Field:', error.field);
+  }
+}
+```
+
 ## Error Handling
 
 The SDK provides specific error classes for different failure scenarios:
@@ -208,7 +254,10 @@ import type {
   CompanyLoginResponse,
   RelatedCompany,
   UserPermissions,
-  DidoxLocale
+  DidoxLocale,
+  AccountProfile,
+  UpdateProfileRequest,
+  UpdateProfileResponse
 } from 'didox';
 
 // Fully typed request
