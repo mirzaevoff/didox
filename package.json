@@ -1,6 +1,6 @@
 {
   "name": "didox",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "homepage": "https://didox.mirzaev.uz/",
   "description": "Node.js SDK to simplify integration with Didox EDO platform in Uzbekistan.",
   "main": "./dist/index.js",
