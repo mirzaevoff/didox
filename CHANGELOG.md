@@ -5,6 +5,15 @@ All notable changes to the Didox SDK will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.4] - 2026-01-17
+
+### Added
+- **Utilities: Legal Entity Information by TIN**
+  - `getLegalEntityInfoByTin()` - Get detailed legal entity information by TIN
+  - Comprehensive company data including legal form, director info, banking details
+  - Address, OKED classification, VAT status, organizational flags
+  - Full TypeScript types with detailed JSDoc documentation
+
 ## [1.0.3] - 2026-01-16
 
 ### Added

@@ -152,3 +152,158 @@ export interface GetBranchesByTinRequest {
    */
   tin: string;
 }
+
+/**
+ * Legal entity information by TIN response
+ */
+export interface LegalEntityInfo {
+  /**
+   * Region code
+   */
+  ns10Code: number;
+
+  /**
+   * District code  
+   */
+  ns11Code: number;
+
+  /**
+   * Short organization name
+   */
+  shortName: string;
+
+  /**
+   * Tax Identification Number (TIN)
+   */
+  tin: string;
+
+  /**
+   * Full organization name
+   */
+  name: string;
+
+  /**
+   * Legal form code
+   */
+  na1Code: number;
+
+  /**
+   * Legal form name
+   */
+  na1Name: string;
+
+  /**
+   * Organization status code
+   */
+  statusCode: number;
+
+  /**
+   * Organization status name
+   */
+  statusName: string;
+
+  /**
+   * Bank MFO code
+   */
+  mfo: string;
+
+  /**
+   * Bank account number
+   */
+  account: string;
+
+  /**
+   * Legal address
+   */
+  address: string;
+
+  /**
+   * OKED classification code
+   */
+  oked: string;
+
+  /**
+   * Director TIN
+   */
+  directorTin: string;
+
+  /**
+   * Director PINFL
+   */
+  directorPinfl: string;
+
+  /**
+   * Director full name
+   */
+  director: string;
+
+  /**
+   * Accountant name (nullable)
+   */
+  accountant: string | null;
+
+  /**
+   * Budget organization flag
+   */
+  isBudget: 0 | 1;
+
+  /**
+   * ITD flag
+   */
+  isItd: boolean;
+
+  /**
+   * Personal number (nullable)
+   */
+  personalNum: string | null;
+
+  /**
+   * Self employment flag
+   */
+  selfEmployment: boolean;
+
+  /**
+   * Private notary flag
+   */
+  privateNotary: boolean;
+
+  /**
+   * Peasant farm flag
+   */
+  peasantFarm: boolean;
+
+  /**
+   * VAT registration code
+   */
+  VATRegCode: string;
+
+  /**
+   * VAT registration status
+   */
+  VATRegStatus: number;
+
+  /**
+   * Bank account (duplicate)
+   */
+  bankAccount: string;
+
+  /**
+   * Bank code (duplicate MFO)
+   */
+  bankCode: string;
+
+  /**
+   * Short name (duplicate)
+   */
+  shortname: string;
+
+  /**
+   * Full name (duplicate)
+   */
+  fullname: string;
+
+  /**
+   * Full name (another duplicate)
+   */
+  fullName: string;
+}

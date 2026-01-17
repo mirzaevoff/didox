@@ -79,7 +79,8 @@ export type {
 // Utilities module types
 export type {
   CompanyBranch,
-  GetBranchesByTinRequest
+  GetBranchesByTinRequest,
+  LegalEntityInfo
 } from './modules/utilities/utilities.types.js';
 
 // Error classes

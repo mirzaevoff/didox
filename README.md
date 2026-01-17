@@ -292,6 +292,37 @@ try {
 }
 ```
 
+### Get Legal Entity Information by TIN
+
+Retrieve detailed legal entity (company) information:
+
+```typescript
+try {
+  const entityInfo = await didox.utilities.getLegalEntityInfoByTin('306915557');
+  
+  console.log('Organization:', entityInfo.name);
+  console.log('Short name:', entityInfo.shortName);
+  console.log('Director:', entityInfo.director);
+  console.log('Legal form:', entityInfo.na1Name);
+  console.log('Address:', entityInfo.address);
+  console.log('OKED code:', entityInfo.oked);
+  console.log('VAT status:', entityInfo.VATRegStatus);
+  console.log('Bank account:', entityInfo.account);
+  console.log('Bank MFO:', entityInfo.mfo);
+  
+  // Check organization flags
+  console.log('Budget org:', entityInfo.isBudget ? 'Yes' : 'No');
+  console.log('Self employment:', entityInfo.selfEmployment ? 'Yes' : 'No');
+  console.log('Private notary:', entityInfo.privateNotary ? 'Yes' : 'No');
+} catch (error) {
+  if (error instanceof DidoxValidationError) {
+    console.error('Invalid TIN format:', error.message);
+  } else if (error instanceof DidoxAuthError) {
+    console.error('Authentication required:', error.message);
+  }
+}
+```
+
 ## Product Classes (ИКПУ)
 
 Manage product classification codes for your company profile.
