@@ -83,6 +83,31 @@ export type {
   LegalEntityInfo
 } from './modules/utilities/utilities.types.js';
 
+// Documents module types
+export type {
+  ListDocumentsParams,
+  DocumentMetadata,
+  DocumentStatistics,
+  DocumentPrivileges,
+  DocumentResponse,
+  DocumentCreatePayload,
+  PaginationMeta,
+  DocumentFilterParams,
+  DateRangeFilter,
+  DocumentsListResponse,
+  NormalizedDocumentsListResponse,
+  DocumentsStatisticsResponse,
+  RawDocumentResponse,
+  RawDocumentPrivilegesResponse
+} from './modules/documents/documents.types.js';
+
+// Documents module enums
+export {
+  DocumentType,
+  DocumentStatus,
+  OwnerType
+} from './modules/documents/documents.enums.js';
+
 // Error classes
 export {
   DidoxError,
@@ -101,3 +126,5 @@ export { VatApi } from './modules/profile/vat.api.js';
 export { WarehousesApi } from './modules/profile/warehouses.api.js';
 export { UsersApi } from './modules/profile/users.api.js';
 export { UtilitiesApi } from './modules/utilities/utilities.api.js';
+export { DocumentsClient, builders, BaseDocumentBuilder } from './modules/documents/index.js';
+export type { DocumentBuilderFactory } from './modules/documents/index.js';

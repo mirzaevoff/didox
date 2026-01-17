@@ -603,4 +603,4 @@ For API documentation and support:
 
 ---
 
-**Note**: This is an unofficial SDK. For official support, contact Didox directly.
+**Note**: This is an unofficial SDK. AI Powered. For official support, contact Didox directly.

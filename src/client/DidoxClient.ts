@@ -5,6 +5,7 @@ import { AuthApi } from '../modules/auth/auth.api.js';
 import { AccountApi } from '../modules/account/account.api.js';
 import { ProfileApi } from '../modules/profile/profile.api.js';
 import { UtilitiesApi } from '../modules/utilities/utilities.api.js';
+import { DocumentsClient } from '../modules/documents/DocumentsClient.js';
 
 /**
  * Main Didox SDK client
@@ -47,6 +48,11 @@ export class DidoxClient {
    */
   public readonly utilities: UtilitiesApi;
 
+  /**
+   * Documents API
+   */
+  public readonly documents: DocumentsClient;
+
   constructor(config: DidoxConfig) {
     // Validate configuration
     this.validateConfig(config);
@@ -73,6 +79,7 @@ export class DidoxClient {
     this.account = new AccountApi(this.httpClient);
     this.profile = new ProfileApi(this.httpClient);
     this.utilities = new UtilitiesApi(this.httpClient);
+    this.documents = new DocumentsClient(this.httpClient);
   }
 
   /**

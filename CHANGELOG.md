@@ -5,6 +5,41 @@ All notable changes to the Didox SDK will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2026-01-17
+
+### Added
+
+- **Documents Module** - Complete electronic document management API
+  - `list()` - List documents with filtering, sorting, and pagination
+  - `get()` - Get detailed document information by ID
+  - `getStatistics()` - Get document statistics with customizable date ranges
+  - `createDraft()` - Universal method for creating document drafts with builders
+
+- **Document Builders** - Fluent API for creating type-safe documents
+  - **InvoiceBuilder (002)** - Electronic invoices with VAT calculation
+  - **ActBuilder (005)** - Acts of completed work and services
+  - **EmpowermentBuilder (006)** - Power of attorney documents
+  - **TTNBuilder (041)** - Transport waybills (TTN)
+  - **ArbitraryBuilder (000)** - Custom documents with flexible structure
+  - **MultiPartyBuilder (010)** - Multi-party contracts and agreements
+  - **FoundersProtocolBuilder (075)** - Founders' meeting protocols
+  - **LetterNKBuilder (013)** - Letters to tax authorities (NK)
+
+### Developer Experience
+
+- **Fluent Builder API** - Chainable methods for intuitive document creation
+- **Full TypeScript Support** - Comprehensive type definitions for all builders
+- **Validation Layer** - Built-in validation for all document fields
+- **Smart Defaults** - Automatic field population where possible
+- **Zero Breaking Changes** - Fully backward compatible with existing APIs
+
+### Production Ready
+
+- Complete test coverage for all document types
+- Production-grade error handling and validation
+- Enterprise-ready document workflows
+- Comprehensive documentation and examples
+
 ## [1.0.4] - 2026-01-17
 
 ### Added
